@@ -6,11 +6,12 @@
   "author": "arvindeva <arvindeva@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "next src",
-    "build": "next build src",
-    "start": "next start src"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
+    "antd": "^3.20.1",
     "apollo-boost": "^0.4.3",
     "graphql": "^14.4.2",
     "isomorphic-unfetch": "^3.0.0",
@@ -21,6 +22,9 @@
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.10.6"
+    "@zeit/next-css": "^1.0.1",
+    "babel-plugin-import": "^1.12.0",
+    "babel-plugin-styled-components": "^1.10.6",
+    "null-loader": "^3.0.0"
   }
 }
