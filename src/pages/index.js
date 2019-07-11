@@ -1,5 +1,11 @@
+import Layout from '../components/Layout';
+
 const Home = () => {
-  return <div>Welcome to Next.js!</div>;
+  return (
+    <Layout>
+      <div>Welcome to Next.js!</div>
+    </Layout>
+  );
 };
 
 export default Home;
