@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   DatePicker,
   TimePicker,
-  Tag,
+  Tag as AntdTag,
   Row,
   Col,
   Input,
@@ -15,7 +15,6 @@ import { gql } from 'apollo-boost';
 
 import { Content } from './Content';
 import CardList from './CardList';
-import SearchPlaceholder from './SearchPlaceholder';
 
 const USERS_QUERY = gql`
   query {
@@ -41,10 +40,14 @@ const Filters = styled.div`
   margin-bottom: 1rem;
 `;
 
+const Tag = styled(AntdTag)`
+  margin: 0.5rem;
+`;
+
 const { Search: SearchBar } = Input;
 
 const Search = () => (
-  <Query query={USERS_QUERY} ssr={false}>
+  <Query query={USERS_QUERY} ssr={false} notifyOnNetworkStatusChange>
     {({ data, loading, error, refetch }) => {
       console.log(data.users);
       return (
@@ -90,7 +93,6 @@ const Search = () => (
             <Col span={8} />
             <Col span={16}>
               {loading ? <Spin size="large" /> : null}
-              {/* {loading ? <SearchPlaceholder /> : null} */}
               {error ? <p>Error</p> : null}
               {data.users && !loading ? (
                 <>

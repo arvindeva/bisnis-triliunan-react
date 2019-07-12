@@ -13,7 +13,7 @@ const ServiceButton = styled.button`
   background: transparent;
   color: white;
   font-family: inherit;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 2.5rem;
   border: 1px solid white;
   border-radius: 0.5rem;
   font-size: 1rem;
