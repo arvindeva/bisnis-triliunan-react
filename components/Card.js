@@ -5,9 +5,9 @@ import { Row, Col, Avatar, Card as AntdCard, Button, Icon } from 'antd';
 const StyledCard = styled(AntdCard)`
   margin-bottom: 1rem;
   border-radius: 1rem;
+
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-    transform: scale(1.001);
   }
   .view-profile {
     margin: 1rem 0;

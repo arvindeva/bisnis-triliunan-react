@@ -1,70 +1,109 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input } from 'antd';
-import { DatePicker, TimePicker, Tag, Row, Col } from 'antd';
+import {
+  DatePicker,
+  TimePicker,
+  Tag,
+  Row,
+  Col,
+  Input,
+  Spin,
+  Button
+} from 'antd';
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
 import { Content } from './Content';
 import CardList from './CardList';
+import SearchPlaceholder from './SearchPlaceholder';
+
+const USERS_QUERY = gql`
+  query {
+    users {
+      id
+      name
+      profile_photo
+      booked_count
+      rating
+      verified
+      age
+    }
+  }
+`;
 
 const Filters = styled.div`
   display: grid;
   grid-gap: 1rem;
   .date-time {
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: auto auto;
+    display: flex;
+    justify-content: space-between;
   }
-
-  .tags {
-  }
+  margin-bottom: 1rem;
 `;
 
 const { Search: SearchBar } = Input;
 
 const Search = () => (
-  <Content>
-    <Row gutter={16}>
-      <Col span={8}>
-        <Filters>
-          <SearchBar
-            placeholder="input search text"
-            onSearch={value => console.log(value)}
-          />
-          <div className="from">
-            <h3>From</h3>
-            <div className="date-time">
-              <DatePicker />
-              <TimePicker />
-            </div>
-          </div>
-          <div className="until">
-            <h3>Until</h3>
-            <div className="date-time">
-              <DatePicker />
-              <TimePicker />
-            </div>
-          </div>
-          <h2>Filter Category</h2>
-          <div className="tags">
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-            <Tag>Tag 1</Tag>
-          </div>
-        </Filters>
-      </Col>
-      <Col span={16}>
-        <h1>42 Results Nearby</h1>
-        <CardList />
-      </Col>
-    </Row>
-  </Content>
+  <Query query={USERS_QUERY} ssr={false}>
+    {({ data, loading, error, refetch }) => {
+      console.log(data.users);
+      return (
+        <Content>
+          <Row gutter={16}>
+            <Col span={6} style={{ position: 'fixed' }}>
+              <Filters>
+                <SearchBar placeholder="input search text" />
+                <div className="from">
+                  <h3>From</h3>
+                  <div className="date-time">
+                    <DatePicker onChange={refetch} />
+                    <TimePicker onChange={refetch} />
+                  </div>
+                </div>
+                <div className="until">
+                  <h3>Until</h3>
+                  <div className="date-time">
+                    <DatePicker onChange={refetch} />
+                    <TimePicker onChange={refetch} />
+                  </div>
+                </div>
+                <h2>Filter Category</h2>
+                <div className="tags">
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                  <Tag>Tag 1</Tag>
+                </div>
+              </Filters>
+              <Button type="primary" onClick={() => refetch()}>
+                Search
+              </Button>
+            </Col>
+            <Col span={8} />
+            <Col span={16}>
+              {loading ? <Spin size="large" /> : null}
+              {/* {loading ? <SearchPlaceholder /> : null} */}
+              {error ? <p>Error</p> : null}
+              {data.users && !loading ? (
+                <>
+                  <h2>{data.users.length} results found</h2>
+                  <CardList results={data.users} />
+                </>
+              ) : null}
+            </Col>
+          </Row>
+        </Content>
+      );
+    }}
+  </Query>
 );
 
 export default Search;

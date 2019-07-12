@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import Logo from './Logo';
 import NavLinks from './NavLinks';
@@ -8,8 +9,22 @@ const StyledNavBar = styled.div`
   position: fixed;
   width: 100%;
   height: 70px;
-  background-color: #4d13d1;
+  background-color: #1890ff;
   z-index: 10;
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 6px -6px #999;
+
+  img {
+    height: 60px;
+    cursor: pointer;
+    transition: 0.1s;
+
+    &:hover {
+      transform: scale(2);
+      transition: 0.1s;
+    }
+  }
 
   .wrapper {
     display: flex;
@@ -27,6 +42,9 @@ const NavBar = () => {
     <StyledNavBar>
       <div className="wrapper">
         <Logo />
+        {/* <Link href="/">
+          <img src="/static/maulapp.gif" alt="my image" />
+        </Link> */}
         <NavLinks />
       </div>
     </StyledNavBar>

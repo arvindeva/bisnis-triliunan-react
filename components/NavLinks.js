@@ -13,7 +13,7 @@ const ServiceButton = styled.button`
   background: transparent;
   color: white;
   font-family: inherit;
-  padding: 0.65rem 1.5rem;
+  padding: 0.5rem 2rem;
   border: 1px solid white;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -28,7 +28,7 @@ const NavLinks = () => {
       <Link href="/">
         <a>Sign Up</a>
       </Link>
-      <Link href="/">
+      <Link href="/signin">
         <a>Sign In</a>
       </Link>
     </StyledNavLinks>
