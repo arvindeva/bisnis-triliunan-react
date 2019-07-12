@@ -15,6 +15,7 @@ import { gql } from 'apollo-boost';
 
 import { Content } from './Content';
 import CardList from './CardList';
+import TagList from './TagList';
 
 const USERS_QUERY = gql`
   query {
@@ -40,16 +41,12 @@ const Filters = styled.div`
   margin-bottom: 1rem;
 `;
 
-const Tag = styled(AntdTag)`
-  margin: 0.5rem;
-`;
-
 const { Search: SearchBar } = Input;
+const InputGroup = Input.Group;
 
 const Search = () => (
   <Query query={USERS_QUERY} ssr={false} notifyOnNetworkStatusChange>
     {({ data, loading, error, refetch }) => {
-      console.log(data.users);
       return (
         <Content>
           <Row gutter={16}>
@@ -59,33 +56,25 @@ const Search = () => (
                 <div className="from">
                   <h3>From</h3>
                   <div className="date-time">
-                    <DatePicker onChange={refetch} />
-                    <TimePicker onChange={refetch} />
+                    <InputGroup compact>
+                      <DatePicker onChange={refetch} style={{ width: '60%' }} />
+                      <TimePicker onChange={refetch} style={{ width: '40%' }} />
+                    </InputGroup>
                   </div>
                 </div>
                 <div className="until">
                   <h3>Until</h3>
                   <div className="date-time">
-                    <DatePicker onChange={refetch} />
-                    <TimePicker onChange={refetch} />
+                    <InputGroup compact>
+                      <DatePicker onChange={refetch} style={{ width: '60%' }} />
+                      <TimePicker onChange={refetch} style={{ width: '40%' }} />
+                    </InputGroup>
                   </div>
                 </div>
                 <h2>Filter Category</h2>
-                <div className="tags">
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                  <Tag>Tag 1</Tag>
-                </div>
+                <TagList />
               </Filters>
+
               <Button type="primary" onClick={() => refetch()}>
                 Search
               </Button>
