@@ -1,15 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  DatePicker,
-  TimePicker,
-  Tag as AntdTag,
-  Row,
-  Col,
-  Input,
-  Spin,
-  Button
-} from 'antd';
+import { DatePicker, TimePicker, Row, Col, Input, Spin, Button } from 'antd';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
@@ -38,7 +29,6 @@ const Filters = styled.div`
     display: flex;
     justify-content: space-between;
   }
-  margin-bottom: 1rem;
 `;
 
 const { Search: SearchBar } = Input;
@@ -71,23 +61,21 @@ const Search = () => (
                     </InputGroup>
                   </div>
                 </div>
-                <h2>Filter Category</h2>
+                <h3>Filter Category</h3>
                 <TagList />
+                <div className="button-wrapper">
+                  <Button type="primary" onClick={() => refetch()}>
+                    Search
+                  </Button>
+                </div>
               </Filters>
-
-              <Button type="primary" onClick={() => refetch()}>
-                Search
-              </Button>
             </Col>
             <Col span={8} />
             <Col span={16}>
               {loading ? <Spin size="large" /> : null}
               {error ? <p>Error</p> : null}
               {data.users && !loading ? (
-                <>
-                  <h2>{data.users.length} results found</h2>
-                  <CardList results={data.users} />
-                </>
+                <CardList results={data.users} />
               ) : null}
             </Col>
           </Row>

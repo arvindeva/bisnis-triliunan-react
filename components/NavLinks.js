@@ -6,6 +6,7 @@ const StyledNavLinks = styled.div`
   a {
     color: white;
     padding: 0 1.5rem;
+    font-size: 1rem;
   }
 `;
 
