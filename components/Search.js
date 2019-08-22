@@ -40,7 +40,7 @@ const Search = () => (
       return (
         <Content>
           <Row gutter={16}>
-            <Col span={6} style={{ position: 'fixed' }}>
+            <Col span={8}>
               <Filters>
                 <SearchBar placeholder="input search text" />
                 <div className="from">
@@ -70,7 +70,6 @@ const Search = () => (
                 </div>
               </Filters>
             </Col>
-            <Col span={8} />
             <Col span={16}>
               {loading ? <Spin size="large" /> : null}
               {error ? <p>Error</p> : null}

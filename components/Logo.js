@@ -15,7 +15,7 @@ const StyledLogo = styled.div`
 const Logo = () => (
   <StyledLogo>
     <Link href="/">
-      <a>MAULAPP</a>
+      <a>-</a>
     </Link>
   </StyledLogo>
 );

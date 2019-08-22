@@ -26,7 +26,7 @@ const NavLinks = () => {
       <Link href="/">
         <ServiceButton>List a Service</ServiceButton>
       </Link>
-      <Link href="/">
+      <Link href="/signup">
         <a>Sign Up</a>
       </Link>
       <Link href="/signin">
